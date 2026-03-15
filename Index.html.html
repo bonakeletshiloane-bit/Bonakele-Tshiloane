@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BONAKELE FC Contract</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+text-align:center;
+background:#ffe6f0;
+padding:50px;
+overflow:hidden;
+}
+
+.container{
+background:white;
+padding:30px;
+border-radius:10px;
+max-width:550px;
+margin:auto;
+box-shadow:0px 0px 10px rgba(0,0,0,0.1);
+position:relative;
+z-index:2;
+}
+
+button{
+padding:12px 25px;
+margin:10px;
+font-size:16px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.yes{
+background:#4CAF50;
+color:white;
+}
+
+.no{
+background:#f44336;
+color:white;
+position:absolute;
+}
+
+.hidden{
+display:none;
+}
+
+input{
+padding:10px;
+margin-top:10px;
+width:80%;
+}
+
+/* floating hearts */
+
+.heart{
+position:absolute;
+color:red;
+font-size:20px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-800px);opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container" id="question">
+<h2>Hey Nompilo, will you be my girlfriend? ❤️</h2>
+
+<button class="yes" onclick="yes()">Yes</button>
+
+<button class="no" id="noBtn">No</button>
+
+</div>
+
+<div class="container hidden" id="terms">
+
+<h2>Relationship Terms & Conditions</h2>
+
+<p>
+
+1. Honest communication at all times.<br><br>
+
+2. Supporting each other through everything.<br><br>
+
+3. Random food dates are mandatory.<br><br>
+
+4. Loyalty, respect and kindness always.<br><br>
+
+5. Celebrating each other's dreams and wins.<br><br>
+
+6. Unlimited hugs and laughter included.<br><br>
+
+7. Official membership to <b>BONAKELE FC</b>.
+
+</p>
+
+<button onclick="accept()">I Accept the Terms</button>
+
+</div>
+
+<div class="container hidden" id="contract">
+
+<h2>Sign the BONAKELE FC Contract</h2>
+
+<p>Please sign below:</p>
+
+<input type="text" id="name" placeholder="Your Name"><br><br>
+
+<p>Enter your email to receive your contract:</p>
+
+<input type="email" id="email" placeholder="Your Email"><br><br>
+
+<button onclick="sign()">Sign Contract</button>
+
+</div>
+
+<div class="container hidden" id="success">
+
+<h1>WELCOME TO BONAKELE FC ⚽</h1>
+
+<p>Contract signed successfully 🎉</p>
+
+</div>
+
+<script>
+
+/* yes button flow */
+
+function yes(){
+
+let confirm1 = confirm("Are you sure you wish to sign the contract with the biggest club in the world aka BONAKELE FC?");
+
+if(confirm1){
+
+let confirm2 = confirm("ARE YOU REALLY SURE NOMPILO?");
+
+if(confirm2){
+
+document.getElementById("question").classList.add("hidden");
+document.getElementById("terms").classList.remove("hidden");
+
+}
+
+}
+
+}
+
+/* runaway no button */
+
+let noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover",function(){
+
+let x = Math.random()*400;
+let y = Math.random()*200;
+
+noBtn.style.left = x+"px";
+noBtn.style.top = y+"px";
+
+});
+
+/* terms accepted */
+
+function accept(){
+
+document.getElementById("terms").classList.add("hidden");
+document.getElementById("contract").classList.remove("hidden");
+
+}
+
+/* signing */
+
+function sign(){
+
+let name=document.getElementById("name").value;
+let email=document.getElementById("email").value;
+
+if(name==="" || email===""){
+
+alert("Please enter your name and email.");
+return;
+
+}
+
+let contract = `
+RELATIONSHIP AGREEMENT
+
+Between:
+Bonakele Tshiloane
+and
+${name}
+
+Club:
+BONAKELE FC
+
+Terms:
+• Honest communication
+• Mutual support
+• Loyalty and respect
+• Random adventures and food dates
+• Encouraging each other's dreams
+
+Signed by: ${name}
+
+Status: OFFICIALLY PART OF BONAKELE FC ⚽
+`;
+
+window.location.href = "mailto:"+email+
+"?subject=Your BONAKELE FC Contract"+
+"&body="+encodeURIComponent(contract);
+
+document.getElementById("contract").classList.add("hidden");
+document.getElementById("success").classList.remove("hidden");
+
+confetti();
+}
+
+/* confetti */
+
+function confetti(){
+
+for(let i=0;i<100;i++){
+
+let heart=document.createElement("div");
+
+heart.className="heart";
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"%";
+heart.style.animationDuration=(Math.random()*3+3)+"s";
+
+document.body.appendChild(heart);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
